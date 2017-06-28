@@ -37,8 +37,21 @@ function createSpinnerFactory (characters, defaultInterval) {
 	}
 }
 
+// FYI: We can probably use this: https://github.com/sindresorhus/cli-spinners/blob/master/spinners.json
+
 module.exports.line = createSpinnerFactory(['/', '—', '\\', '|'])
-module.exports.dots = createSpinnerFactory(['⣾','⣽','⣻','⢿','⡿','⣟','⣯','⣷'].reverse())
+// module.exports.dots = createSpinnerFactory(['⣾','⣽','⣻','⢿','⡿','⣟','⣯','⣷'].reverse())
+module.exports.dots = createSpinnerFactory(["⠋",	"⠙", "⠹", "⠸",
+			"⠼",
+			"⠴",
+			"⠦",
+			"⠧",
+			"⠇",
+			"⠏"])
+
+module.exports.dot = createSpinnerFactory(['⠁', '⠂', '⠄', '⡀', '⢀', '⠠', '⠐', '⠈'])
+module.exports.arc = createSpinnerFactory(['◜ ', ' ◝', ' ◞', '◟ '])
+module.exports.o = createSpinnerFactory(['.','o','O','@','*',' '])
 module.exports.bars = options => {
 	options = Object.assign({
 		length: 6,
