@@ -30,7 +30,7 @@ function fixedLog () {
 		if (!wrapper) {
 			globalSetup()
 		}
-		wrapper.setString(args.join(' '))
+		wrapper.setString(args.join(''))
 	}
 }
 
@@ -136,7 +136,7 @@ module.exports.spinner = (options) => {
     // const arr = ['⠁', '⠂', '⠄', '⡀', '⢀', '⠠', '⠐', '⠈']
     // const arr = characters
 
-	return module.exports.flip(arr, { interval: 100 })
+	// return module.exports.flip(arr, { interval: 100 })
 
 	options = Object.assign({
 		interval: 100
