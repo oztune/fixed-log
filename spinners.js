@@ -56,13 +56,13 @@ module.exports.bars = options => {
 	options = Object.assign({
 		length: 6,
 		empty: '░',
-		full: '▒',
+		full: '█',
 		prefix: '|',
 		suffix: '|'
 	}, options)
 
 	const numBars = options.length
-	const numFrames = (numBars * 2)
+	const numFrames = (numBars * 2 + 1)
 	let chars = []
 	for (let i = 0; i < numFrames; ++i) {
 		let str = ''
@@ -80,9 +80,9 @@ module.exports.bars = options => {
 
 Interesting characters
 
-'▒'
-'░'
-' '
+░ ▒ ▓ █
+
+■
 
 Interesting squences
 
