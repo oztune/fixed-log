@@ -3,6 +3,8 @@ const cliCursor = require('cli-cursor')
 
 let wrapper
 
+const isTTY = process.stdout.isTTY && process.stderr.isTTY
+
 function globalSetup () {
 	wrapper = createWrapper()
 	cliCursor.hide()
@@ -21,6 +23,10 @@ function globalDispose () {
 
 function fixedLog () {
 	const args = Array.from(arguments)
+	if (!isTTY) {
+		console.log.apply(console, args)
+		return
+	}
 
 	if (args.length <= 1 && args[0] == null) {
 		if (wrapper) {
@@ -61,13 +67,17 @@ module.exports = function () {
 
 	args.forEach((value, i) => {
 		if (typeof value === 'function') {
-			const dispose = value(update.bind(null, i))
-			if (dispose) {
-				if (!disposers) {
-					disposers = []
+			if (isTTY) {
+				const dispose = value(update.bind(null, i))
+				if (dispose) {
+					if (!disposers) {
+						disposers = []
+					}
+					// Add to disposers
+					disposers.push(dispose)
 				}
-				// Add to disposers
-				disposers.push(dispose)
+			} else {
+				values[i] = ''
 			}
 		} else {
 			values[i] = value
