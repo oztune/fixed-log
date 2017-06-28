@@ -9,7 +9,9 @@
   "author": "Oz Michaeli <oztune+npm@gmail.com> (https://appfigures.com)",
   "license": "ISC",
   "dependencies": {
-    "cli-cursor": "^2.1.0",
+    "cli-cursor": "^2.1.0"
+  },
+  "devDependencies": {
     "colors": "^1.1.2"
   }
 }
