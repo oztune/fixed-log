@@ -1,5 +1,7 @@
 // This should probably be refactored
 
+const renderProgressBar = require('./renderProgressBar')
+
 function createSpinner (characters, options) {
 	options = Object.assign({
 		interval: 100
@@ -52,28 +54,19 @@ module.exports.dots = createSpinnerFactory(["⠋",	"⠙", "⠹", "⠸",
 module.exports.dot = createSpinnerFactory(['⠁', '⠂', '⠄', '⡀', '⢀', '⠠', '⠐', '⠈'])
 module.exports.arc = createSpinnerFactory(['◜ ', ' ◝', ' ◞', '◟ '])
 module.exports.o = createSpinnerFactory(['.','o','O','@','*',' '])
-module.exports.bars = options => {
-	options = Object.assign({
-		length: 6,
-		empty: '░',
-		full: '█',
-		prefix: '|',
-		suffix: '|'
-	}, options)
-
-	const numBars = options.length
+module.exports.bars = (renderOprions) => {
+	const numBars = renderOprions.length
 	const numFrames = (numBars * 2 + 1)
 	let chars = []
 	for (let i = 0; i < numFrames; ++i) {
-		let str = ''
-		for (let j = 0; j < numBars; ++j) {
-			const full = i <= numBars ? j < i : j >= (i - numBars)
-			str += full ? options.full : options.empty
-		}
-		chars.push(options.prefix + str + options.suffix)
+		const range = i <= numBars ?
+			[0, i] :
+			[i - numBars, numBars]
+		
+		chars.push(renderProgressBar(range, renderOprions))
 	}
 
-	return createSpinner(chars, options)
+	return createSpinner(chars, renderOprions)
 }
 
 /*
